@@ -5,7 +5,7 @@ export function uniqueId() {
 }
 
 export function createTask({ title, description }) {
-  console.log('actions.index.js.tasks: { title, description }', { title, description });
+  console.log('actions.index.js.createTask: { title, description }', { title, description });
   return {
     type: 'CREATE_TASK',
     payload: {
@@ -13,6 +13,17 @@ export function createTask({ title, description }) {
       title,
       description,
       status: 'Unstarted',
+    },
+  };
+}
+
+export function editTask(id, params={}) {
+  console.log('actions.index.js.editTask:  id, params ',  id, params );
+  return {
+    type: 'EDIT_TASK',
+    payload: {
+      id,
+      params,
     },
   };
 }
