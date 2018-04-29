@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import TasksPage from './components/TasksPage';
 import { connect } from 'react-redux';
-import { createTask, editTask } from './actions';
+import TasksPage from './components/TasksPage';
+import { createTask, editTask, fetchTasks } from './actions';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.dispatch(fetchTasks());
+  }
 
   onCreateTask = ({ title, description }) => {
     console.log('App.onCreateTask: { title, description }', { title, description });
