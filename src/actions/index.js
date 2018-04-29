@@ -1,4 +1,4 @@
-import axios from 'axios';
+import * as api from '../api';
 
 let _id = 1;
 
@@ -33,12 +33,10 @@ export function editTask(id, params={}) {
 export function fetchTasks() {
   console.log('actions.index.js.fetchTasks' );
   return dispatch => {
-    axios
-      .get('http://localhost:3001/tasks')
-      .then( resp => {
-        dispatch(fetchTasksSucceded(resp.data));
-        console.log('actions.index.js.fetchTasks - response dispatched - data: ', resp.data );
-      });
+    api.fetchTasks().then( resp => {
+      dispatch(fetchTasksSucceded(resp.data));
+      console.log('actions.index.js.fetchTasks - response dispatched - data: ', resp.data );
+    });
   }
 }
 
