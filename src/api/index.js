@@ -19,3 +19,8 @@ export function createTask(params) {
   console.log('api.index.js.createTask - client.post dispatched');
   return client.post('/tasks', params);
 }
+
+export function editTask(id, params) {
+  console.log('api.index.js.editTask - client.put dispatched');
+  return client.put('/tasks/'+id, params);
+}
