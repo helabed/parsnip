@@ -14,3 +14,8 @@ export function fetchTasks() {
   console.log('api.index.js.fetchTasks - client.get dispatched');
   return client.get('/tasks');
 }
+
+export function createTask(params) {
+  console.log('api.index.js.createTask - client.post dispatched');
+  return client.post('/tasks', params);
+}

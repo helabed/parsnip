@@ -19,9 +19,11 @@ export default function tasks(state = { tasks: [] }, action) {
   }
 
   if (action.type === 'FETCH_TASKS_SUCCEEDED') {
-    return {
-      tasks: action.payload.tasks,
-    }
+    return { tasks: action.payload.tasks, }
+  }
+
+  if (action.type === 'CREATE_TASK_SUCCEEDED') {
+    return { tasks: state.tasks.concat(action.payload.task) };
   }
 
   return state

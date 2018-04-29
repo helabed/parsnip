@@ -1,22 +1,21 @@
 import * as api from '../api';
 
-let _id = 1;
-
-export function uniqueId() {
-  return _id++;
+function createTaskSucceeded(task) {
+  console.log('actions.index.js.createTaskSucceeded - task: ', task );
+  return {
+    type: 'CREATE_TASK_SUCCEEDED',
+    payload: { task },
+  };
 }
 
-export function createTask({ title, description }) {
+export function createTask({ title, description, status = 'Unstarted' }) {
   console.log('actions.index.js.createTask: { title, description }', { title, description });
-  return {
-    type: 'CREATE_TASK',
-    payload: {
-      id: uniqueId(),
-      title,
-      description,
-      status: 'Unstarted',
-    },
-  };
+  return dispatch => {
+    api.createTask({title, description, status}).then( resp => {
+      dispatch(createTaskSucceeded(resp.data));
+      console.log('actions.index.js.createTask - response dispatched - data: ', resp.data );
+    });
+  }
 }
 
 export function editTask(id, params={}) {
@@ -41,7 +40,7 @@ export function fetchTasks() {
 }
 
 export function fetchTasksSucceded(tasks) {
-  console.log('actions.index.js.fetchTasksSucceded - data: ', tasks );
+  console.log('actions.index.js.fetchTasksSucceded - tasks: ', tasks );
   return {
     type: 'FETCH_TASKS_SUCCEEDED',
     payload: {
